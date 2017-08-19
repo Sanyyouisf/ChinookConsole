@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Dapper;
 
 namespace ChinookConsoleApp
 {
@@ -10,26 +11,31 @@ namespace ChinookConsoleApp
         public void Delete()
         {
             var employeeList = new ListEmployees();
-            var firedEmployee = employeeList.List("Pick an employee to transition:");
+            var firedEmployee = employeeList.List("Pick an employee to Delete:");
 
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Chinook"].ConnectionString))
+            using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
             {
                 connection.Open();
-                var cmd = connection.CreateCommand();
-                cmd.CommandText = "Delete From Employee where EmployeeId = @EmployeeId";
+                //var cmd = connection.CreateCommand();
+                //cmd.CommandText = "Delete From Employee where EmployeeId = @EmployeeId";
 
-                var employeeIdParameter = cmd.Parameters.Add("@EmployeeId", SqlDbType.Int);
-                employeeIdParameter.Value = firedEmployee;
+                //var employeeIdParameter = cmd.Parameters.Add("@EmployeeId", SqlDbType.Int);
+                //employeeIdParameter.Value = firedEmployee;
 
                 try
                 {
-                    var affectedRows = cmd.ExecuteNonQuery();
+                    //run the command- we donot need this when using Dapper 
+                    //var affectedRows = cmd.ExecuteNonQuery();
+                    var deletedName = connection.Execute("Delete From Employee where EmployeeId = @EmployeeId" ,new { EmployeeId = firedEmployee });
 
-                    if (affectedRows == 1)
+
+                    //if (affectedRows == 1)
+                    if (deletedName == 1)
                     {
-                        Console.WriteLine("Success");
+                        Console.WriteLine(" deleted Successfully");
                     }
-                    else if (affectedRows > 1)
+                    //else if (affectedRows > 1)
+                    else if (deletedName == 1)
                     {
                         Console.WriteLine("AAAAHHHHHH");
                     }

@@ -27,8 +27,9 @@ namespace ChinookConsoleApp
                 var selection = Console.ReadLine();
 
 
-                if (selection == "1") new ListEmployees().List();
+                if (selection == "1") new ListEmployees().List("press enter to return ");
                 if (selection == "2") new AddEmployee().Add();
+                if (selection == "4") new DeleteEmployee().Delete();
                 if (selection == "3") new UpdateLastName().Update();
                 if (selection == "9") break;
 

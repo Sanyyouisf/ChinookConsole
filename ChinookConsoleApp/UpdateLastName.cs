@@ -41,17 +41,17 @@ namespace ChinookConsoleApp
                     UpdateEmployeeLastNameCommand.CommandText = "UPDATE Employee SET LastName = '@NewLastName' WHERE EmployeeId = @EmpId";
 
 
-                    var updatedLastNameParameter = UpdateEmployeeLastNameCommand.Parameters.Add("@NewLastName", SqlDbType.VarChar);
-                    updatedLastNameParameter.Value = NewLastName;
+                   // var updatedLastNameParameter = UpdateEmployeeLastNameCommand.Parameters.Add("@NewLastName", SqlDbType.VarChar);
+                   // updatedLastNameParameter.Value = NewLastName;
 
-                    var updatedLastNameParameterId = UpdateEmployeeLastNameCommand.Parameters.Add("@NewLastName", SqlDbType.VarChar);
-                    updatedLastNameParameter.Value = NewLastName;
+                    //var updatedLastNameParameterId = UpdateEmployeeLastNameCommand.Parameters.Add("@NewLastName", SqlDbType.VarChar);
+                    //updatedLastNameParameter.Value = NewLastName;
 
                     try
                     {
                         //set the text of update command
-                        var rowsAffected = UpdateEmployeeLastName.ExecuteNonQuery();
-                        Console.WriteLine(rowsAffected != 1 ? "Add Failed" : "Success!");
+                        //var rowsAffected = UpdateEmployeeLastName.ExecuteNonQuery();
+                       // Console.WriteLine(rowsAffected != 1 ? "Add Failed" : "Success!");
                         Console.WriteLine("Press enter to return to the menu.");
                         Console.ReadLine();
                     }
