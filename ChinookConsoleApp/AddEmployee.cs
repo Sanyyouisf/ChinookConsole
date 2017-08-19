@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Dapper;
 
 namespace ChinookConsoleApp
 {
@@ -33,8 +35,18 @@ namespace ChinookConsoleApp
                     //oppen the connection
                     connection.Open();
                     //run the command 
-                    var rowsAffected = employeeAdd.ExecuteNonQuery();
+                    //var rowsAffected = employeeAdd.ExecuteNonQuery();
+
+                    var rowsAffected = connection.Execute("Insert into Employee(FirstName, LastName) " +
+                                                          "Values(@FirstName, @LastName)",
+                        new {FirstName = x, LastName = y});
+
                     Console.WriteLine(rowsAffected != 1 ? "Add Failed" : "Success!");
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("You done messed up");
+                    Console.WriteLine(ex.Message);
                 }
                 catch (Exception ex)
                 {

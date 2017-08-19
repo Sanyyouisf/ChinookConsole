@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Data.SqlClient;
+using Dapper;
 
 namespace ChinookConsoleApp
 {
+    public class EmployeeListResult
+    {
+        public int Id { get; set; }
+        public string FullName { get; set; }
+    }
+
     public class ListEmployees
     {
-        public void List()
+        public int List(string prompt)
         {
             Console.Clear();
             //1- create connection
@@ -21,22 +28,29 @@ namespace ChinookConsoleApp
                 {
                     //4- open the connection
                     connection.Open();
-                    //5- run the command 
-                    var reader = employeeListCommand.ExecuteReader();
 
-                    while (reader.Read())
+                    //5- run the command 
+                    //var reader = employeeListCommand.ExecuteReader();
+
+                    var result = connection.Query<EmployeeListResult>("select employeeid as Id, " +
+                                                                      "firstname + ' ' + lastname as fullname " +
+                                                                      "from Employee");
+
+                    foreach (var employee in result)
                     {
-                        Console.WriteLine($"{reader["Id"]}.) {reader["FullName"]}");
+                        Console.WriteLine($"{employee.Id}.) {employee.FullName}");
                     }
 
-                    Console.WriteLine("Press enter to return to the menu.");
-                    Console.ReadLine();
+                    Console.WriteLine(prompt);
+                    return int.Parse(Console.ReadLine());
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
                 }
+
+                return 0;
             }
         }
     }
