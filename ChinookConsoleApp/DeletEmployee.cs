@@ -35,7 +35,7 @@ namespace ChinookConsoleApp
                         Console.WriteLine(" deleted Successfully");
                     }
                     //else if (affectedRows > 1)
-                    else if (deletedName == 1)
+                    else if (deletedName >1)
                     {
                         Console.WriteLine("AAAAHHHHHH");
                     }
