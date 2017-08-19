@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.SqlClient;
 
 namespace ChinookConsoleApp
@@ -9,18 +8,20 @@ namespace ChinookConsoleApp
         public void List()
         {
             Console.Clear();
-
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Chinook"].ConnectionString))
+            //1- create connection
+            using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
             {
+                //2- create command
                 var employeeListCommand = connection.CreateCommand();
-
+                //3- set the text of command
                 employeeListCommand.CommandText = "select employeeid as Id, " +
                                                   "firstname + ' ' + lastname as fullname " +
                                                   "from Employee";
-
                 try
                 {
+                    //4- open the connection
                     connection.Open();
+                    //5- run the command 
                     var reader = employeeListCommand.ExecuteReader();
 
                     while (reader.Read())
