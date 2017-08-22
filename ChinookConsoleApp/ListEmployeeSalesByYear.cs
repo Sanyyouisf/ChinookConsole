@@ -31,7 +31,7 @@ namespace ChinookConsoleApp
 
                     var result = Connection.Query<EmployeeSalesListByYear>
                         ("select  Employee.FirstName+' '+ Employee.LastName as FullName" +
-                         //"sum(Invoice.Total) as TotalSales" +
+                         "sum(Invoice.Total) as TotalSales" +
                          "from Employee join Customer" +
                          "on Employee.EmployeeId = Customer.SupportRepId" +
                          "join Invoice" +
