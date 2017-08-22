@@ -49,6 +49,7 @@
     <Compile Include="AddEmployee.cs" />
     <Compile Include="DeletEmployee.cs" />
     <Compile Include="ListEmployees.cs" />
+    <Compile Include="ListEmployeeSalesByYear.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateLastName.cs" />

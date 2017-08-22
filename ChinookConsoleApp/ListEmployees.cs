@@ -48,7 +48,6 @@ namespace ChinookConsoleApp
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
                 }
-
                 return 0;
             }
         }
